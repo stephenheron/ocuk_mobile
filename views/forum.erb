@@ -1,0 +1,55 @@
+<%= erb :'layout/html_header' %>
+<body>
+  <div data-role="page">
+  <%= erb :'layout/page_header' %>
+    <div data-role="content" class="ui-content" role="main">
+      <% unless @sub_forums.nil? %>
+        <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider">Sub Forums</li>
+          <% @sub_forums.each do |forum| %>
+            <li>
+              <a href="/forum/<%= forum.id %>"><%= forum.title %></a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <ul data-role="listview" data-split-icon="arrow-r" data-inset="true">
+        <% if @threads.first.sticky %>
+          <li data-role="list-divider">Important Stuff</li>
+        <% end %>
+        <% first_normal_post = false %>
+        <% @threads.each do |thread| %>
+          <% if !thread.moved %>
+            <% if first_normal_post == false && !thread.sticky %>
+              <li data-role="list-divider"></li>
+              <% first_normal_post = true %>
+            <% end %>
+            <li> 
+              <a href="/thread/<%= thread.id %>">
+                <% if thread.sticky %>
+                 <h3>Important Stuff: <%=thread.title %></h3>
+                <% else %>
+                 <h3><%=thread.title %></h3>
+                <% end %>
+                <p>
+                  <b><%= thread.poster_username %></b>
+                  <br />
+                 Replies <%= thread.number_of_replies %>
+                 Views <%= thread.number_of_views %>
+                </p>
+              </a>
+              <a href="/thread/<%= thread.newest_page_id %>/last"></a>
+            </li>
+          <% end %>
+        <% end %>
+      <ul>
+    </div>
+    <div  data-role="footer"> 
+      <a href="index.html" data-role="button" data-icon="plus">New Thread</a> 
+      <span style="float:right">
+        <a href="/forum/<%= @id %>/page/<%= @page.nil? ? 2 : (@page.to_i + 1)%>" data-role="button" data-icon="arrow-r">Next Page</a> 
+      </span>
+    </div> 
+  </div>
+</body>
+</html>

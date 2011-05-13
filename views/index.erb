@@ -1,0 +1,23 @@
+<%= erb :'layout/html_header' %>
+<body>
+  <div data-role="page">
+    <div data-role="content" class="ui-content" role="main">
+      <h1 id="forumlogo">
+        <img src="forumlogo.jpg">
+      </h1>
+      <% @boards.each do |category_name, category_array| %>
+        <ul data-role="listview" data-inset="true">
+          <% unless category_array.empty? %>
+            <li data-role="list-divider"><%= category_name %></li> 
+          <% end %>
+          <% category_array.each do |forum| %>
+            <li>
+              <a href="forum/<%= forum.id %>"><%= forum.title %></a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>

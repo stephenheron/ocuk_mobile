@@ -1,0 +1,38 @@
+<%= erb :'layout/html_header' %>
+<body>
+  <div data-role="page">
+  <%= erb :'layout/page_header' %>
+    <div data-role="content" class="ui-content" role="main">
+      <ul data-role="listview" data-theme="d">
+        <% @posts.each do |post_information| %>
+          <li data-theme="b">
+            <% user = post_information[:user] %>
+            <%= user.username %><br />
+            <%= user.post_count %> <br />
+            <%= user.location %>
+          </li>
+          <li> 
+            <% post = post_information[:post] %>
+            <%= post.content %> 
+          </li>
+        <% end %>
+      <ul>
+    </div>
+    <div data-role="footer">
+    <div data-role="navbar">
+    <ul>
+      <li><a href="#">Page <%= @thread_information[:current_page] %> of <%= @thread_information[:max_page] %></a></li>
+    </ul>
+  </div> 
+    <% if !@thread_information[:current_page] == '1' %>
+      <a href="/thread/<%=@thread_information[:id] %>/page/<%= @thread_information[:current_page].to_i - 1 %>" data-role="button" data-icon="arrow-l">Previous Page</a>
+    <% end %>
+    <% if @thread_information[:max_page] != @thread_information[:current_page] %>
+      <span style="float:right">
+        <a href="/thread/<%= @thread_information[:id] %>/page/<%= @thread_information[:current_page].to_i + 1 %>" data-role="button" data-icon="arrow-r">Next Page</a>
+      </span>
+    <% end %>
+    </div> 
+  </div>
+</body>
+</html>
