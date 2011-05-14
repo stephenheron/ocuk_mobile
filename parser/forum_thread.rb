@@ -58,7 +58,11 @@ class ForumThread
     posts = doc.css('#posts > div > div')
     posts.each do |post_html|
       user_information = post_html.css('div > table > tr')[1].css('td')
-      username = user_information.css('div > a')[0].content.force_encoding("ISO-8859-1")
+
+      #Deleted post
+      next if user_information.css('div > a')[0].nil?
+
+      username = user_information.css('div > a')[0].content
       user_title = user_information.css('div')[1].content
 
       # Check if a avatar is present. If it is not set the offset to -1

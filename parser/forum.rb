@@ -63,6 +63,8 @@ class Forum
       views_html = row.css('td')[5]
       replies_html = row.css('td')[4]
 
+      #Deleted thread
+      next if title_html.css('a')[0].nil?
 
       title = title_html.css('a')[0].content
       id = title_html.css('a')[0].attributes['href'].value.match('&t=\d+').to_s.match('\d+').to_s.to_i
