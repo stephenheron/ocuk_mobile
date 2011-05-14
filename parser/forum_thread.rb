@@ -24,7 +24,6 @@ class ForumThread
     if page.nil?
       if last 
         thread_url = "http://forums.overclockers.co.uk/showthread.php?p=#{id}"
-        puts "http://forums.overclockers.co.uk/showthread.php?p=#{id}"
       else
         thread_url = "http://forums.overclockers.co.uk/showthread.php?t=#{id}"
       end
@@ -35,11 +34,7 @@ class ForumThread
   end
 
   def self.thread_information(doc)
-    if doc.css('div > .page > div > table')[0].css('tr')[0].css('.navbar').to_s.scan(/showthread.php\?t=(\d*)/)[0].nil?
-      thread_id = doc.css('div > .page > div > table')[0].css('tr')[0].css('.navbar').to_s.scan(/showthread.php\?p=(\d*)/)[0].first
-    else
-      thread_id = doc.css('div > .page > div > table')[0].css('tr')[0].css('.navbar').to_s.scan(/showthread.php\?t=(\d*)/)[0].first
-    end
+    thread_id = doc.css('div > div.page > div').to_s.match('<td class="alt1" nowrap><a class="smallfont" href="showthread.php\?s=\S*').to_s.scan(/;t=(\d*)/).first[0]
     thread_title = doc.css('head > title')[0].content.gsub(' - Overclockers UK Forums', '')
     page_information = doc.css('div > .page > div > table')[1].css('table > tr > td')[0]
     if page_information.nil?
