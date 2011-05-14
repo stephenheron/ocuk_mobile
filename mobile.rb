@@ -48,7 +48,7 @@ end
 
 
 get '/thread/:id/page/:page' do
-  doc = ForumThread.load_thread(params[:id], params[:id], false)
+  doc = ForumThread.load_thread(params[:id], params[:page], false)
   @posts = ForumThread.posts(doc)
   @thread_information = ForumThread.thread_information(doc)
   @page_title = @thread_information[:title]
