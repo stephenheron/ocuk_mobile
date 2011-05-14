@@ -13,7 +13,7 @@
           </li>
           <li> 
             <% post = post_information[:post] %>
-            <%= post.content %> 
+            <%= post.content.force_encoding("ISO-8859-1").encode("UTF-8") %> 
           </li>
         <% end %>
       <ul>
