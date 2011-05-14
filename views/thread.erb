@@ -20,18 +20,16 @@
     </div>
     <div data-role="footer">
     <div data-role="navbar">
-    <ul>
-      <li><a href="#">Page <%= @thread_information[:current_page] %> of <%= @thread_information[:max_page] %></a></li>
-    </ul>
-  </div> 
-    <% if !@thread_information[:current_page] == '1' %>
+      <ul>
+        <li><a href="#">Full Forum</a></li>
+        <li><a href="#">Page <%= @thread_information[:current_page] %> of <%= @thread_information[:max_page] %></a></li>
+        <li><a href="#">Reply</a></li>
+      </ul>
+    </div> 
       <a href="/thread/<%=@thread_information[:id] %>/page/<%= @thread_information[:current_page].to_i - 1 %>" data-role="button" data-icon="arrow-l">Previous Page</a>
-    <% end %>
-    <% if @thread_information[:max_page] != @thread_information[:current_page] %>
       <span style="float:right">
         <a href="/thread/<%= @thread_information[:id] %>/page/<%= @thread_information[:current_page].to_i + 1 %>" data-role="button" data-icon="arrow-r">Next Page</a>
       </span>
-    <% end %>
     </div> 
   </div>
 </body>
