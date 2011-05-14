@@ -21,9 +21,9 @@
     <div data-role="footer">
     <div data-role="navbar">
       <ul>
-        <li><a href="#" >Full Forum</a></li>
+        <li><a href="/thread/<%= @thread_information[:id] %>/full" rel="external" >Full Forum</a></li>
         <li><a href="#" onclick="go_to_page(<%=@thread_information[:id]%>)">Page <%= @thread_information[:current_page] %> of <%= @thread_information[:max_page] %></a></li>
-        <li><a href="#">Reply</a></li>
+        <li><a href="/thread/<%= @thread_information[:id] %>/reply" rel="external">Reply</a></li>
       </ul>
     </div> 
       <a href="/thread/<%=@thread_information[:id] %>/page/<%= @thread_information[:current_page].to_i - 1 %>" data-role="button" data-icon="arrow-l">Previous Page</a>
