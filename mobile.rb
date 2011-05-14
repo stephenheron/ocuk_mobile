@@ -38,6 +38,14 @@ get '/thread/:id' do
   erb :thread
 end
 
+get '/thread/:id/reply' do
+    redirect "http://forums.overclockers.co.uk/newreply.php?do=newreply&noquote=1&p=#{params[:id]}"
+end
+
+get '/thread/:id/full' do
+    redirect "http://forums.overclockers.co.uk/showthread.php?t=#{params[:id]}"
+end
+
 get '/thread/:id/last' do
   doc = ForumThread.load_thread(params[:id], nil, true)
   @posts = ForumThread.posts(doc)
