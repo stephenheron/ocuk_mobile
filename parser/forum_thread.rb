@@ -34,7 +34,11 @@ class ForumThread
   end
 
   def self.thread_information(doc)
-    thread_id = doc.css('div > div.page > div').to_s.match('<td class="alt1" nowrap><a class="smallfont" href="showthread.php\?s=\S*').to_s.scan(/;t=(\d*)/).first[0]
+    if thread_id = doc.css('div > div.page > div').to_s.match('<td class="alt1" nowrap><a class="smallfont" href="showthread.php\?s=\S*').to_s.scan(/;t=(\d*)/).first.nil?
+      thread_id = doc.css('div > .page > div > table')[0].css('tr')[0].css('.navbar').to_s.scan(/showthread.php\?t=(\d*)/)[0].first
+    else
+      thread_id = doc.css('div > div.page > div').to_s.match('<td class="alt1" nowrap><a class="smallfont" href="showthread.php\?s=\S*').to_s.scan(/;t=(\d*)/).first[0]
+    end
     thread_title = doc.css('head > title')[0].content.gsub(' - Overclockers UK Forums', '')
     page_information = doc.css('div > .page > div > table')[1].css('table > tr > td')[0]
     if page_information.nil?
