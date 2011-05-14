@@ -21,8 +21,8 @@
     <div data-role="footer">
     <div data-role="navbar">
       <ul>
-        <li><a href="#">Full Forum</a></li>
-        <li><a href="#">Page <%= @thread_information[:current_page] %> of <%= @thread_information[:max_page] %></a></li>
+        <li><a href="#" >Full Forum</a></li>
+        <li><a href="#" onclick="go_to_page(<%=@thread_information[:id]%>)">Page <%= @thread_information[:current_page] %> of <%= @thread_information[:max_page] %></a></li>
         <li><a href="#">Reply</a></li>
       </ul>
     </div> 
